@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/home.css">
+    
+    <title>Todo App</title>
+    <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!------------- adding header of website -------------->
+    <header><h1>Todo App</h1></header>
+    <!------- adding container for showing notification ------>
+    <div id="toast"></div>
+    <!------------ adding main of website ------------>
+    <main>
+      <div class="common-div_prop">
+        <!----------- adding form to take input for todo task from user  -------------->
+        <form action="/create-task" method="post">
+          <div>
+          <!--------- taking input of task description from user  ------------->
+            <div><label>Description</label></div>
+            <div>
+              <input type="text" name="task_name" id="task_desc" placeholder="what do you need to do?" required >
+            </div>
+          </div>
+          <hr>
+          <br>
+          <!----------- taking input of task date and task category from user ----------->
+          <div id="date_type">
+            <div style="width:40%;" class="common-div_prop">
+              <div><span style=" font-size: 1.5rem; font-weight: 600;">Category</span></div>
+              <div class="custom-select">
+              <select  name="task_type" >
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="Home">Home</option>
+                <option value="Office">Office</option>
+                <option value="College">College</option>
+                <option value="Business">Business</option>
+                <option value="School">School</option>
+                <option value="Exams">Exams</option>
+                <option value="Assignment">Assignment</option>
+                <option value="Job">Job</option>
+                <option value="Family">Family</option>
+                <option value="Healthcare">Healthcare</option>
+              </select>
+              </div>
+            </div>
+            <div style="width:40%;">
+              <label>Due date</label>  
+              <input type="date" name="task_date" id="task_desc">    
+            </div>
+          </div>
+          <hr>
+          <!----------------- adding button for respective action -------------->
+          <div id="btn_div">
+            <div >
+              <button type="submit" id="add_btn"><i class="fas fa-plus"></i>  Add task</button>  
+            </div>
+            <div >
+              <button type="button" class="del_btn" id="deleteAcc"><i class="far fa-trash-alt"></i>  Delete Task</button>
+            </div> 
+          </div>
+      </div>
+    </form>
+    <hr>
+    <br>
+    <!------------------- to display todo list on website------------------------>
+    <div class="control-group">
+        <% for (var i = 0; i < todo_list.length; i++) { %>
+          <div style="height: 15vh; border:2px solid black; display: flex; flex-direction: row; justify-content: space-between; padding: 20px;">
+        <div style="width: 70%;">
+        <label class="container">
+          <input type="checkbox" id="<%= todo_list[i]._id%>"/>
+          <span class="checkmark"></span>
+          <span><%= todo_list[i].task_name %></span>
+          <p class="date_icon"><i class="far fa-calendar-alt"></i>    <%= todo_list[i].task_date.toDateString() %></p>
+        </label>
+        </div>
+          
+        <div style=" background-color : rgb(43, 43, 131);height:3rem; margin-top: 1.8rem; width: 150px;">
+          <span style="color : white ; margin-left:20%; margin-top: 20%;"><%= todo_list[i].task_type %></span>
+        </div>
+      </div>
+      <hr>
+        <% } %>
+    </div>
+  </main>
+  <!---------- adding javascript file -------------------------->
+  <script type="text/javascript" src="js/home.js"></script>
+  </body>
+</html>
